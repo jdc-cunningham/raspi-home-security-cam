@@ -23,7 +23,7 @@ Use case, you browse the Raspberry Pi's local IP 192.168.###.### and assuming yo
 
 # Physical build
 
-![Alt text]!(https://raw.githubusercontent.com/jdc-cunningham/raspi-home-security-cam/master/concept.jpg "Raspberry Pi Home Security Camera PIR Motion Sensor Using PHP+Python and Amazon S3")
+![Alt text](https://raw.githubusercontent.com/jdc-cunningham/raspi-home-security-cam/master/concept.jpg "Raspberry Pi Home Security Camera PIR Motion Sensor Using PHP+Python and Amazon S3")
 
 Yeah it is pretty ugly. I can't fabricate boards yet at this time or have them be built by somebody. This is pretty basic just has the MCP3008 ADC and a voltage divider. I did see that there are solderable-breadboards that might be my next step up. I also ended up using a little 1W LED for visual calibration of the PIR sensor (easier to see it flash = on)
 
