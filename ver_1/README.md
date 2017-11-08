@@ -63,3 +63,5 @@ The crontab to use is sudo crontab as this needs to run as root
 
 Right now the main problem is that broken/bad files are uploaded to S3 I think because the code is trying to upload empty stuff. The actual files are uploaded fully but this extra garbage comes along sometimes. Thankfully I'm still in the free tier of AWS services haha.
 
+Edit: Actually they are log files, I just never set the prefix, it was just undefined, can turn logging off in your bucket
+
