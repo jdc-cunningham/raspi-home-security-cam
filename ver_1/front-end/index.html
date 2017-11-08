@@ -1,0 +1,221 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- <link rel="icon" href="favicon.ico" type="image/x-icon">
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" width="16" height="16">  -->
+        <!-- <meta name="author" content="Jacob David C. Cunningham" > -->
+        <title>Raspi Home Cam</title>
+        <style>
+            #main-container {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+            }
+                #message {
+                    position: relative;
+                    width: 100%;
+                    height: auto;
+                    padding: 15px 0;
+                    color: #282828;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+                    #disp-msg {
+                        font-size: 64px;
+                    }
+                .btn {
+                    position: relative;
+                    width: 25%;
+                    height: auto;
+                    padding: 15px;
+                    border-radius: 6px;
+                    margin: 15px;
+                    font-weight: bold;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    box-shadow: 2px 2px 2px #808080;
+                    cursor: pointer;
+                }
+                    .btn-text {
+                        font-size: 32px;
+                    }
+                    #on-btn {
+                        background-color: #dcdcdc;
+                    }
+                    #on-btn:hover {
+                        background-color: green !important;
+                        color: white;
+                    }
+                    #off-btn {
+                        background-color: #dcdcdc;
+                    }
+            /* responsive section */
+            @media screen and (max-width: 600px) {
+                /* change font sizes */
+                #disp-msg {
+                    font-size: 30px;
+                }
+                .btn-text {
+                    font-size: 14px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div id="main-container">
+            <div id="message">
+                <h1 id='disp-msg'>Checking camera state...</h1>
+            </div>
+            <div id="on-btn" class="btn" title="turn camera on">
+                <h2 class="btn-text">On</h2>
+            </div>
+            <div id="off-btn" class="btn" title="turn camera off">
+                <h2 class="btn-text">Off</h2>
+            </div>
+        </div>
+        <script>
+
+            const dispMsg = document.getElementById('disp-msg'),
+                  onBtn = document.getElementById('on-btn'),
+                  offBtn = document.getElementById('off-btn');
+            
+            let camState = null;
+
+            // get request
+            function getAjax(url, success) {
+                var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+                xhr.open('GET', url);
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState>3 && xhr.status==200) success(xhr.responseText);
+                };
+                xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+                xhr.send();
+                return xhr;
+            }
+
+            function changeBtnColor(btn,color) {
+                // change color
+                btn.style.background = color;
+                if (color == 'red' || color == 'green') {
+                    btn.style.color = 'white';
+                }
+                else {
+                    btn.style.color = '#282828';
+                }
+            }
+
+            function setMsg(msg) {
+                dispMsg.innerHTML = msg;
+            }
+
+            function camStateUpdate(serverResponse) {
+                let recCamState = JSON.parse(serverResponse);
+                if (recCamState['cam_state'] == 'camera off') {
+                    camState = 'off';
+                    setMsg('Camera Is Off');
+                }
+                else if (recCamState['cam_state'] == 'camera on') {
+                    camState = 'on';
+                    setMsg('Camera is On');
+                    changeBtnColor(onBtn,'green');
+                }
+            }
+
+            // check cam state on page visit
+            getAjax('check-text.php', camStateUpdate);
+
+            function postAjax(url, data, success) {
+                var params = typeof data == 'string' ? data : Object.keys(data).map(
+                        function(k){ return encodeURIComponent(k) + '=' + encodeURIComponent(data[k]) }
+                    ).join('&');
+
+                var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+                xhr.open('POST', url);
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState>3 && xhr.status==200) { success(xhr.responseText); }
+                };
+                xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.send(params);
+                return xhr;
+            }
+
+            // countdown for arming
+            let startingTime = 60,
+                armCounter = null;
+
+            function subOne() {
+                if (startingTime != 0) {
+                        startingTime = (startingTime - 1);
+                    // target.innerText = startingTime;
+                    setMsg('Camera Armed In <br>' + startingTime + ' seconds');
+                    return false;
+                }
+                else {
+                        return true;
+                }
+            }
+
+            function countDown() {
+                armCounter = setTimeout(function() {
+                    if (subOne() == false) {
+                        // run again
+                        countDown();
+                    }
+                    else {
+                        // set new message
+                        setMsg('Camera Is On');
+                    }
+                }, 1000); // run every second
+            }
+
+            onBtn.addEventListener('click', function() {
+
+                // prevent inputs until camera state determined or if requested state is the same as current state
+                if (camState == null || camState == 'on') {
+                    return;
+                }      
+
+                // update button state
+                camState = 'on';
+                // change color of button to green
+                changeBtnColor(onBtn,'green');
+                // set display message
+                setMsg('Camera Arming...');
+                // send command to server
+                postAjax('php-to-python.php', 'camera_state=on', function(data){ console.log(data); });
+                // delay for 1 minute
+                countDown(); // start counter
+            });
+
+            offBtn.addEventListener('click', function() {
+
+                // prevent inputs until camera state determined
+                if (camState == null || camState == 'off') {
+                    return;
+                }  
+
+                camState = 'off';
+                changeBtnColor(onBtn,'#dcdcdc');
+                setMsg('Camera Is Off');
+                // clear timeout
+                clearTimeout(armCounter)
+                // reset starting time
+                startingTime = 60;
+                // send command to server
+                postAjax('php-to-python.php', 'camera_state=off', function(data){ console.log(data); });
+            });
+
+        </script>
+    </body>
+</html>
