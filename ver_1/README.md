@@ -33,6 +33,32 @@ I can't go too indepth into the code right now, would like to write a full blog 
 
 I also mentioned I'm not using the method of interfacing with Amazon's S3 service where the credentials are hard-coded. I had the AWSCLI method working as well but the profile wasn't being read right. I imagine it's another permission problem.
 
+# Permissions
+
+In general folders have 755 and files have 644
+
+This was one major source of headache for me, I will list out the files and their permissions:
+
+Folder (front-end) owned by www-data:www-data (Apache)
+* index.html (pi or www-data)
+* check-text.php (www-data)
+* php-to-python.php (www-data)
+
+Folder (back-end) owned by root:root
+* camera-check.py (root)
+* simpletest2.py (root)
+* cloudupload.py (root)
+* uploadfunction.py (root)
+* camera-on.py, camera-off.py (www-data)
+* take_photo.py (root)
+* all.txt files except testfile.txt and second-state.txt (root)
+
+It's possible some of these don't need to be owned by root because CRON starts the main process under sudo
+
+# CRON
+
+The crontab to use is sudo crontab as this needs to run as root
+
 # Problems
 
 Right now the main problem is that broken/bad files are uploaded to S3 I think because the code is trying to upload empty stuff. The actual files are uploaded fully but this extra garbage comes along sometimes. Thankfully I'm still in the free tier of AWS services haha.
