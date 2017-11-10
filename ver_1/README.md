@@ -17,7 +17,7 @@ The photos are not accessible online unless you set that up. I have to log into 
 
 Here's a visual flow chart on how the code works:
 
-![Alt text](https://raw.githubusercontent.com/jdc-cunningham/raspi-home-security-cam/master/raspberry-pi-home-security-motion-camera-to-amazon-s3-event-flowchart.png "Raspberry Pi Home Security Camera PIR Motion Sensor Using PHP+Python and Amazon S3")
+![Alt text](https://raw.githubusercontent.com/jdc-cunningham/raspi-home-security-cam/master/ver_1/correct-path.png "Raspberry Pi Home Security Camera PIR Motion Sensor Using PHP+Python and Amazon S3")
 
 Use case, you browse the Raspberry Pi's local IP 192.168.###.### and assuming you have that setup as a web server (I used Apache) that hosts the front-end code. Provided your file permissions are correct, simply click on, wait a minute (or less depending on CRON time) and the three processes will be started: raspistill, PIR-motion sensor polling(simpletest2.py), and the cloud upload to S3 (cloudupload.py)
 
