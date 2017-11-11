@@ -65,3 +65,8 @@ Right now the main problem is that broken/bad files are uploaded to S3 I think b
 
 Edit: Actually they are log files, I just never set the prefix, it was just undefined, can turn logging off in your bucket
 
+# Updates
+
+This will need a restart script when WiFi is down. I tried to get something working but none of the commands would bring WiFi back up. Maybe I was too impatient (need to wait longer than a second). Or maybe not try to call it from Python, rather outside of Python. I noticed it was not connected to the WiFi today but I was home so that was lucky. I updated the firmware maybe that will help.
+
+Will still look into adding that, it needs to set the state to off and then restart again, will probably need a restart_requested state somewhere.
