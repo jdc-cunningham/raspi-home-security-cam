@@ -83,6 +83,9 @@ if (test_str == 'camera on'):
 
                     # add new measurement
                     recent_values.append(trimmed_motion_sensor_output)
+                    
+                    # take first 6 pictures anyway due to 300ms lag
+                    snap()
 
             time.sleep(0.3)
 
