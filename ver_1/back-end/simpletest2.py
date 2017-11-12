@@ -51,12 +51,38 @@ if (test_str == 'camera on'):
         # Main program loop.
         while True:
 
+            # this has a debouncer, for every 6 sequential sensor reads, if at least 2 are above 800
+            # take a picture
+            # remove the last one (first in list after 6 have been recorded)
+            
             motion_sensor_output = mcp.read_adc(1)
             print (motion_sensor_output)
-
+            
             if (motion_sensor_output > 800):
 
-                snap()
+                cur_sens_arr_cnt = len(recent_values)
+
+                trimmed_motion_sensor_output = str(motion_sensor_output)[:1]
+
+                if (cur_sens_arr_cnt == 6):
+
+                    # remove last one (first in list)
+                    recent_values.pop(0)
+
+                    # add new measurement
+                    recent_values.append(trimmed_motion_sensor_output)
+
+                    # check occurrence count, if at least 2 trigger camera eg. [0,8,8,0,0,0] or [8,8,0,0,0,0] etc...
+                    occur_count = recent_values.count(trimmed_motion_sensor_output)
+                    if (occur_count >= 2):
+
+                        # take picture
+                        snap()
+
+                else:
+
+                    # add new measurement
+                    recent_values.append(trimmed_motion_sensor_output)
 
             time.sleep(0.3)
 
