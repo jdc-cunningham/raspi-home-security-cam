@@ -47,6 +47,10 @@ if (test_str == 'camera on'):
 
         # comparison
         recent_values = []; # empty array
+        
+        # dynamic threshold setting
+        default_threshold = 700
+        high_threshold = default_threshold
 
         # Main program loop.
         while True:
@@ -56,9 +60,22 @@ if (test_str == 'camera on'):
             # remove the last one (first in list after 6 have been recorded)
             
             motion_sensor_output = mcp.read_adc(1)
-            print (motion_sensor_output)
             
-            if (motion_sensor_output > 800):
+            # print (motion_sensor_output)
+            
+            # compare and get threshold
+            if (motion_sensor_output > high_threshold):
+                # compare first digit
+                if (int(str(motion_sensor_output)[:1]) > int(str(high_threshold)[:1])):
+                    # update new high threshold
+                    high_threshold = int(str(motion_sensor_output)[:1] + '00')
+            else:
+                # add to highest threshold, maybe PIR to ADC outputting less than 700 as peak value
+                # highest, low-baseline measured, currently back down to 0-4
+                if (motion_sensor_output > 160 and motion_sensor_output < default_threshold):
+                    high_threshold = int(str(motion_sensor_output)[:1] + '00')
+            
+            if (motion_sensor_output > high_threshold):
 
                 cur_sens_arr_cnt = len(recent_values)
 
