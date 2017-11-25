@@ -40,12 +40,12 @@ def file_upload(file_path,file_name,call_back,file_list):
 
     global s3Conn, mybucket, update_cloud_uploaded_files, time, os, upload_counter
 
-    # today_date = time.strftime("%H-%M-%S")
+    today_date = time.strftime("%m-%d-%Y")
     ran_4_hex = binascii.b2a_hex(os.urandom(2))
 
     bucketobj = s3Conn.get_bucket(mybucket)
     k = Key(bucketobj)
-    k.key = ran_4_hex + '_' + file_name
+    k.key = ran_4_hex + '_' + today_date + '_' + file_name
     # k.new_key = file_name
     k.set_contents_from_filename(file_path)
     update_cloud_uploaded_files_list(file_name)
