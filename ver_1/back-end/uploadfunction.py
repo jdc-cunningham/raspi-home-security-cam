@@ -51,6 +51,7 @@ def file_upload(file_path,file_name,call_back,file_list):
     update_cloud_uploaded_files_list(file_name)
     print('file uploaded: ' + file_name)
     upload_counter += 1
+    time.sleep(0.1) # delay in lieu of not having a callback from s3 "upload complete" still a guess
     call_back(file_list)
 
 def batch_upload(upload_list):
