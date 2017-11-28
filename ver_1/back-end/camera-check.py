@@ -30,7 +30,7 @@ if (str == 'camera on' and system_on != 'yes'):
 
     # start camera
     def cam_start():
-        os.system('raspistill -t 0 -s -w 1080 -h 720 -ex sports -awb auto -o /home/pi/Adafruit_Python_MCP3008/examples/home_security_photos/motion_image%04d.jpg')
+        os.system('raspistill -t 0 -s -w 1280 -h 720 -ex sports -awb auto -o /home/pi/Adafruit_Python_MCP3008/examples/home_security_photos/motion_image%04d.jpg')
     # start PIR sensor listener
     def pir_start():
         os.system('/usr/bin/python /home/pi/Adafruit_Python_MCP3008/examples/simpletest2.py')
