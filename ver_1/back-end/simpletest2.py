@@ -59,7 +59,7 @@ if (test_str == 'camera on'):
             # take a picture
             # remove the last one (first in list after 6 have been recorded)
             
-            motion_sensor_output = mcp.read_adc(1)
+            motion_sensor_output = mcp.read_adc(0)
             
             # print (motion_sensor_output)
             
