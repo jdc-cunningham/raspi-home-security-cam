@@ -27,6 +27,13 @@ Use case, you browse the Raspberry Pi's local IP 192.168.###.### and assuming yo
 
 Yeah it is pretty ugly. I can't fabricate boards yet at this time or have them be built by somebody. This is pretty basic just has the MCP3008 ADC and a voltage divider. I did see that there are solderable-breadboards that might be my next step up. I also ended up using a little 1W LED for visual calibration of the PIR sensor (easier to see it flash = on)
 
+## Wiring diagram
+![Alt text](https://raw.githubusercontent.com/jdc-cunningham/raspi-home-security-cam/master/ver_1/pi-zero-w-pir-1w-led-wiring.png "Raspberry Pi With 12V PIR Sensor ADC MCP3008 1W LED")
+
+Here is a wiring diagram, the ADC to Pi GPIO bridge is not great haha, took me a couple of orientation attempts to figure out how to best illustrate. If you're unsure, refer to the Adafruit guide for the MCP3008 ADC: https://learn.adafruit.com/raspberry-pi-analog-to-digital-converters/mcp3008
+
+One thing to note is their photo is good, but the text below that may be misleading with regard to order of list compared to the photo.
+
 # Code
 
 I can't go too indepth into the code right now, would like to write a full blog about it, but don't have that setup yet. This is also not that great of a build. I'm just starting to use Python and in general I'm still not great at laying out code architecurally where it makes sense eg. not importing libraries more than once.
