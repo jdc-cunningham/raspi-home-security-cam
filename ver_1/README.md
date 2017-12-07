@@ -30,6 +30,8 @@ Yeah it is pretty ugly. I can't fabricate boards yet at this time or have them b
 ## Wiring diagram
 ![Alt text](https://raw.githubusercontent.com/jdc-cunningham/raspi-home-security-cam/master/ver_1/pi-zero-w-pir-1w-led-wiring.png "Raspberry Pi With 12V PIR Sensor ADC MCP3008 1W LED")
 
+Note the PIR represented here is only showing the output positive and negative leads and not the wires coming from the wall into the PIR.
+
 Here is a wiring diagram, the ADC to Pi GPIO bridge is not great haha, took me a couple of orientation attempts to figure out how to best illustrate. If you're unsure, refer to the Adafruit guide for the MCP3008 ADC: https://learn.adafruit.com/raspberry-pi-analog-to-digital-converters/mcp3008
 
 One thing to note is their photo is good, but the text below that may be misleading with regard to order of list compared to the photo.
