@@ -11,6 +11,7 @@ Expanding on this:
 
 In my configuration, the directory path is ```~/Adafruit_Python_MCP3008/examples/```
 So I installed Adafruit's MCP3008 library as per their instructions using the pip method, in the ~/ directory (starting point):
+```~``` is actually the (a shortcut to?) home directory or ```/home/pi``` for my case
 
 ```cd ~```
 
