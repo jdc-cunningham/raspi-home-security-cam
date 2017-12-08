@@ -54,7 +54,7 @@ Note the PIR represented here is only showing the output positive and negative l
 
 This particular PIR when it detects motion, it outputs the same voltage that it gets in, since it's powered by a 12V 3A supply, it outputs 12V. The ADC I believe has a maximum voltage of 5.5V or so, this is where the voltage divider comes in to drop the 12V to something like 3V - 4V due to the 1W LED wired in parallel.
 
-The PIR can be calibrated to stay on for a while or stay on very briefly, that's the setup here, a pulse. The PIR sampling poll is at about 300ms and I believe the Raspberry Pi + Camera can caputer at about 200ms per photo using the signal method. It might be possible to go even faster with smaller photos or just do video.
+The PIR can be calibrated to stay on for a while or stay on very briefly, that's the setup here, a pulse. The PIR sampling poll is at about 300ms and I believe the Raspberry Pi + Camera can capture at about 200ms per photo using the signal method. It might be possible to go even faster with smaller photos or just do video.
 
 Then it's pretty much, if the ADC input spikes, trigger the photo. The ADC works by multiplying the reference voltage in this case 3.3V from the Pi by the analog input from the ADC which ranges from 0 to 1024. Anyway on average it's between 700 - 800 on my setup. So I added a debouncer (in case of false positives) and a max-setting as the PIR sometimes changes where at rest it's normally outputting 0, but sometimes the base line is above 150 but the peak is noramlly around 700 - 800.
 
