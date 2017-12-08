@@ -13,6 +13,7 @@ In my configuration, the directory path is ```~/Adafruit_Python_MCP3008/examples
 So I installed Adafruit's MCP3008 library as per their instructions using the pip method, in the ~/ directory (starting point):
 
 ```cd ~```
+
 ```sudo pip install adafruit-mcp3008```
 
 https://learn.adafruit.com/raspberry-pi-analog-to-digital-converters/mcp3008
