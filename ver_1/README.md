@@ -56,7 +56,7 @@ This particular PIR when it detects motion, it outputs the same voltage that it 
 
 The PIR can be calibrated to stay on for a while or stay on very briefly, that's the setup here, a pulse. The PIR sampling poll is at about 300ms and I believe the Raspberry Pi + Camera can capture at about 200ms per photo using the signal method. It might be possible to go even faster with smaller photos or just do video.
 
-Then it's pretty much, if the ADC input spikes, trigger the photo. The ADC works by multiplying the reference voltage in this case 3.3V from the Pi by the analog input from the ADC which ranges from 0 to 1024. Anyway on average it's between 700 - 800 on my setup. So I added a debouncer (in case of false positives) and a max-setting as the PIR sometimes changes where at rest it's normally outputting 0, but sometimes the base line is above 150 but the peak is noramlly around 700 - 800.
+Then it's pretty much, if the ADC input spikes, trigger the photo. The ADC works by multiplying the reference voltage in this case 3.3V from the Pi by the analog input from the ADC which ranges from 0 to 1024. Anyway on average it's between 700 - 800 on my setup. So I added a debouncer (in case of false positives) and a max-setting as the PIR sometimes changes where at rest it's normally outputting 0, but sometimes the base line is above 150 but the peak is normally around 700 - 800.
 
 # Code
 
@@ -82,7 +82,7 @@ Folder (back-end) owned by root:root
 * uploadfunction.py (root)
 * camera-on.py, camera-off.py (www-data)
 * take_photo.py (root)
-* all.txt files except testfile.txt and second-state.txt (root)
+* all .txt files except testfile.txt and second-state.txt (root)
 
 It's possible some of these don't need to be owned by root because CRON starts the main process under sudo
 
