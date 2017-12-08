@@ -7,6 +7,17 @@ This is also not cleaned up/paths setup, this is what is currently click-button-
 
 Thanks to Adafruit's library and tutorial on interfacing with the ADC MCP3008, note how this code was pretty much built around that library/directory.
 
+Expanding on this:
+
+In my configuration, the directory path is ```~/Adafruit_Python_MCP3008/examples/```
+So I installed Adafruit's MCP3008 library as per their instructions using the pip method, in the ~/ directory (starting point):
+
+```cd ~```
+```sudo pip install adafruit-mcp3008```
+
+https://learn.adafruit.com/raspberry-pi-analog-to-digital-converters/mcp3008
+https://github.com/adafruit/Adafruit_Python_MCP3008
+
 # Introduction
 
 This is a web-triggered, motion-based, home security system using the Raspberry Pi and a PIR sensor. It's only using the local web (home WiFi) to turn the system on/off (arming). It has a public web connection but it's one directional (to Amazon S3) and to Slack (to let me know it's armed before I leave my apartment and that files uploaded(photos were taken)). I have a cat so this can happen.
