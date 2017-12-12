@@ -10,15 +10,12 @@ Thanks to Adafruit's library and tutorial on interfacing with the ADC MCP3008, n
 Expanding on this:
 
 In my configuration, the directory path is ```~/Adafruit_Python_MCP3008/examples/```
-So I installed Adafruit's MCP3008 library as per their instructions using the pip method, in the ~/ directory (starting point):
-```~``` is actually the (a shortcut to?) home directory or ```/home/pi``` for my case
+So I installed Adafruit's MCP3008 library as per their instructions using commands noted on the first part of their GitHub page:
 
-```cd ~```
-
-```sudo pip install adafruit-mcp3008```
-
-https://learn.adafruit.com/raspberry-pi-analog-to-digital-converters/mcp3008
 https://github.com/adafruit/Adafruit_Python_MCP3008
+
+Then followed their tutorial on how to wire the ADC to the pi
+https://learn.adafruit.com/raspberry-pi-analog-to-digital-converters/mcp3008
 
 # Introduction
 
