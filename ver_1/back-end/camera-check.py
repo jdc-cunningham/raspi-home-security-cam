@@ -7,6 +7,31 @@ from threading import Thread
 #     f.write(status)  # python will convert \n to os.linesep
 #     f.close()
 
+# reconnect to WiFi by restarting
+hostname = 'www.example.com' # or other domain
+response = os.system('ping -c 1 ' + hostname)
+if response != 0:
+    print ('Pi disconnected, rebooting')
+    # set system-on.txt state to 'no' for camera-check.py to start the 3 main threads again
+    # upon reconnect to WiFi
+    f = open('/home/pi/Adafruit_Python_MCP3008/examples/system-on.txt', 'w')
+    f.write('no')
+    f.close()
+    slack_data = {'text': "Pi down, requesting system reboot..."}
+    # slack send information
+    response = requests.post(
+        webhook_url, data=json.dumps(slack_data),
+        headers={'Content-Type': 'application/json'}
+    )
+    if response.status_code != 200:
+        raise ValueError(
+            'Request to slack returned an error %s, the response is:\n%s'
+            % (response.status_code, response.text)
+        )
+    from subprocess import call
+    call("sudo shutdown -r now", shell=True)
+    exit()
+
 def update_batch_state(batch_state):
     f = open('/home/pi/Adafruit_Python_MCP3008/examples/batch_state.txt', 'w')
     f.write(batch_state)  # python will convert \n to os.linesep
