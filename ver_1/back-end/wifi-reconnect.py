@@ -1,6 +1,6 @@
 # this script is triggered by a CRON schedule
 # for me I am doing every 2 minutes so my CRON tab looks like this (without the #)
-# * * * * * /usr/bin/python /home/pi/wifi-reconnect.py
+# */2 * * * * /usr/bin/python /home/pi/wifi-reconnect.py
 
 # this code is from this thread
 # https://www.raspberrypi.org/forums/viewtopic.php?t=133665
