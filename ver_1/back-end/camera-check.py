@@ -1,5 +1,6 @@
 import os, threading
 from threading import Thread
+import requests
 webhook_url = 'your webhook'
 
 # function: update cloud upload status
