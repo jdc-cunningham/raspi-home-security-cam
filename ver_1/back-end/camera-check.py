@@ -59,7 +59,7 @@ if (str == 'camera on' and system_on != 'yes'):
     Thread(target=cloud_upload_start).start()
     
     # send slack notification
-    slack_data = {'text': "Pi down, requesting system reboot..."}
+    slack_data = {'text': "Camera armed"}
     # slack send information
     response = requests.post(
         webhook_url, data=json.dumps(slack_data),
