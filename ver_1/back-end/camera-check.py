@@ -19,17 +19,6 @@ if response != 0:
     f = open('/home/pi/Adafruit_Python_MCP3008/examples/system-on.txt', 'w')
     f.write('no')
     f.close()
-    slack_data = {'text': "Pi down, requesting system reboot..."}
-    # slack send information
-    response = requests.post(
-        webhook_url, data=json.dumps(slack_data),
-        headers={'Content-Type': 'application/json'}
-    )
-    if response.status_code != 200:
-        raise ValueError(
-            'Request to slack returned an error %s, the response is:\n%s'
-            % (response.status_code, response.text)
-        )
     from subprocess import call
     call("sudo shutdown -r now", shell=True)
     exit()
@@ -68,6 +57,20 @@ if (str == 'camera on' and system_on != 'yes'):
     Thread(target=cam_start).start()
     Thread(target=pir_start).start()
     Thread(target=cloud_upload_start).start()
+    
+    # send slack notification
+    slack_data = {'text': "Pi down, requesting system reboot..."}
+    # slack send information
+    response = requests.post(
+        webhook_url, data=json.dumps(slack_data),
+        headers={'Content-Type': 'application/json'}
+    )
+    if response.status_code != 200:
+        raise ValueError(
+            'Request to slack returned an error %s, the response is:\n%s'
+            % (response.status_code, response.text)
+        )
+    
     # call upload outside?
     # os.system('/usr/bin/python /home/pi/Adafruit_Python_MCP3008/examples/cloudupload.py')
 elif (str == 'camera off'):
