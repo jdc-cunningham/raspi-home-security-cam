@@ -11,6 +11,11 @@ hostname = 'www.example.com' # or other domain
 response = os.system('ping -c 1 ' + hostname)
 if response != 0:
     print ('Pi disconnected, rebooting')
+    # set system-on.txt state to 'no' for camera-check.py to start the 3 main threads again
+    # upon reconnect to WiFi
+    f = open('/home/pi/Adafruit_Python_MCP3008/examples/system-on.txt', 'w')
+    f.write('no')
+    f.close()
     from subprocess import call
     call("sudo shutdown -r now", shell=True)
 
