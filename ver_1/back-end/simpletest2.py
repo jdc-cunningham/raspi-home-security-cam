@@ -15,18 +15,19 @@ if (test_str == 'camera on'):
         f = open('/home/pi/Adafruit_Python_MCP3008/examples/second-state.txt', 'w')
         f.write('loop in progress')  # python will convert \n to os.linesep
         f.close()
-
-        slack_data = {'text': "Camera Armed"}
-        # slack send information
-        response = requests.post(
-            webhook_url, data=json.dumps(slack_data),
-            headers={'Content-Type': 'application/json'}
-        )
-        if response.status_code != 200:
-            raise ValueError(
-                'Request to slack returned an error %s, the response is:\n%s'
-                % (response.status_code, response.text)
-            )
+        
+# called in another script now, camera-check.py
+#         slack_data = {'text': "Camera Armed"}
+#         # slack send information
+#         response = requests.post(
+#             webhook_url, data=json.dumps(slack_data),
+#             headers={'Content-Type': 'application/json'}
+#         )
+#         if response.status_code != 200:
+#             raise ValueError(
+#                 'Request to slack returned an error %s, the response is:\n%s'
+#                 % (response.status_code, response.text)
+#             )
 
         print('this executed')
 
