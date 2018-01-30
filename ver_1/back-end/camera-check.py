@@ -19,6 +19,18 @@ if response != 0:
     f = open('/home/pi/Adafruit_Python_MCP3008/examples/system-on.txt', 'w')
     f.write('no')
     f.close()
+    g = open('/home/pi/Adafruit_Python_MCP3008/examples/second-state.txt', 'w')
+    g.write('')
+    g.close()
+    h = open('/home/pi/Adafruit_Python_MCP3008/examples/batch_state.txt', 'w')
+    h.write('yes')
+    h.close()
+    i = open('/home/pi/Adafruit_Python_MCP3008/examples/cloud-uploaded-files.txt', 'w')
+    i.write('')
+    i.close()
+    os.system('pkill raspistill')
+    os.system('pkill -f simpletest2.py')
+    os.system('pkill -f cloudupload.py')
     from subprocess import call
     call("sudo shutdown -r now", shell=True)
     exit()
@@ -40,7 +52,7 @@ def update_system_state(system_state):
 
 str = open('/home/pi/Adafruit_Python_MCP3008/examples/testfile.txt', 'r').read()
 system_on = open('/home/pi/Adafruit_Python_MCP3008/examples/system-on.txt', 'r').read()
-if (str == 'camera on' and system_on != 'yes'):
+if ('camera on' in str and 'yes' not in system_on):
     # set system state
     update_system_state('yes')
 
@@ -73,7 +85,7 @@ if (str == 'camera on' and system_on != 'yes'):
     
     # call upload outside?
     # os.system('/usr/bin/python /home/pi/Adafruit_Python_MCP3008/examples/cloudupload.py')
-elif (str == 'camera off'):
+elif ('camera off' in str):
     # update system state
     update_system_state('no')
     # kill processes
