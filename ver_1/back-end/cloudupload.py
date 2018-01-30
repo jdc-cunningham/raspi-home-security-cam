@@ -14,7 +14,7 @@ while True:
 
     # check batch_state, yes means currently in upload process, no means no upload is happening
     cur_batch_state = get_batch_state()
-    if (cur_batch_state == 'yes'):
+    if ('yes' in cur_batch_state):
 
         # try a new upload
 
@@ -43,5 +43,5 @@ while True:
 
     
     # polling
-    print('cloud upload polling...')
+    # print('cloud upload polling...') # these get super long in the logs
     time.sleep(1)
