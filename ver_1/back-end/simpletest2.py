@@ -7,10 +7,10 @@ webhook_url = 'your-webhook-url'
 
 # check first
 test_str = open('/home/pi/Adafruit_Python_MCP3008/examples/testfile.txt', 'r').read()
-if (test_str == 'camera on'):
+if ('camera on' in test_str):
     second_state = open('/home/pi/Adafruit_Python_MCP3008/examples/second-state.txt', 'r').read()
     print(second_state)
-    if (second_state != 'loop in progress'):
+    if ('loop in progress' not in second_state):
         print ('if ran')
         f = open('/home/pi/Adafruit_Python_MCP3008/examples/second-state.txt', 'w')
         f.write('loop in progress')  # python will convert \n to os.linesep
@@ -108,7 +108,7 @@ if (test_str == 'camera on'):
             time.sleep(0.3)
 
 
-elif (test_str == 'camera off'):
+elif ('camera off' in test_str):
     # end raspistill
     os.system("pkill raspistill")
     # terminate processes
