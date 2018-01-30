@@ -26,7 +26,7 @@ if response != 0:
     h.write('yes')
     h.close()
     i = open('/home/pi/Adafruit_Python_MCP3008/examples/cloud-uploaded-files.txt', 'w')
-    i.write('')
+    i.write('') # random comment to add commit msg
     i.close()
     os.system('pkill raspistill')
     os.system('pkill -f simpletest2.py')
