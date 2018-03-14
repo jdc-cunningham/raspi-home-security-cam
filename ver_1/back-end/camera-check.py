@@ -49,12 +49,22 @@ def update_system_state(system_state):
     f = open('/home/pi/Adafruit_Python_MCP3008/examples/system-on.txt', 'w')
     f.write(system_state)  # python will convert \n to os.linesep
     f.close()
+    
+def update_test_file(system_state):
+    f = open('/home/pi/Adafruit_Python_MCP3008/examples/testfile.txt', 'w')
+    f.write(system_state)  # python will convert \n to os.linesep
+    f.close()
+    
+def update_second_str():
+    requests.get("http://your-ip/obscure-string.php?camera_on=no&key=your-key")
 
 str = open('/home/pi/Adafruit_Python_MCP3008/examples/testfile.txt', 'r').read()
+second_str = requests.get("http://your-ip/obscure-string.php")
 system_on = open('/home/pi/Adafruit_Python_MCP3008/examples/system-on.txt', 'r').read()
-if ('camera on' in str and 'yes' not in system_on):
+if (('camera on' in str or 'camera on' in second_str) and 'yes' not in system_on):
     # set system state
     update_system_state('yes')
+    update_test_file('camera on')
 
     # start camera
     def cam_start():
@@ -88,6 +98,7 @@ if ('camera on' in str and 'yes' not in system_on):
 elif ('camera off' in str):
     # update system state
     update_system_state('no')
+    update_second_str()
     # kill processes
     os.system("pkill raspistill")
     os.system('pkill -f simpletest2.py')
