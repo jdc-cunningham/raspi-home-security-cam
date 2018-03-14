@@ -120,11 +120,11 @@
 
             function camStateUpdate(serverResponse) {
                 let recCamState = JSON.parse(serverResponse);
-                if (recCamState['cam_state'] == 'camera off') {
+                if (recCamState['cam_state'].indexOf(camera off') !== -1) {
                     camState = 'off';
                     setMsg('Camera Is Off');
                 }
-                else if (recCamState['cam_state'] == 'camera on') {
+                else if (recCamState['cam_state'].indexOf('camera on') !== -1) {
                     camState = 'on';
                     setMsg('Camera is On');
                     changeBtnColor(onBtn,'green');
