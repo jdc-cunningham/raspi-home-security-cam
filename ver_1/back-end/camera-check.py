@@ -12,7 +12,7 @@ webhook_url = 'your webhook'
 # reconnect to WiFi by restarting
 hostname = 'www.example.com' # or other domain
 response = os.system('ping -c 1 ' + hostname)
-if response != 0:
+if response == 0:
     print ('Pi disconnected, rebooting')
     # set system-on.txt state to 'no' for camera-check.py to start the 3 main threads again
     # upon reconnect to WiFi
