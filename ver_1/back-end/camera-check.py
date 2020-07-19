@@ -106,6 +106,7 @@ elif ('camera off' in str):
     update_batch_state('yes')
     reset_cloud_uploaded_files()
     os.system('pkill -f cloudupload.py')
+    os.system('chown pi:root /home/pi/Adafruit_Python_MCP3008/examples/home_security_photos/*.jpg')
     # os.system('/usr/bin/python cloud_off.py') # might interrupt an upload in progress will add in loop
     # run again to have it kill the processes
     # os.system('/usr/bin/python /home/pi/Adafruit_Python_MCP3008/examples/simpletest2.py')
