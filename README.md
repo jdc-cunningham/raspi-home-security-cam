@@ -1,4 +1,4 @@
-# Raspberry Pi Home Security Cam With CV (Future)
+# Raspberry Pi Home Security Cam
 
 ## Update
 I created version 1 (see /ver_1/)
