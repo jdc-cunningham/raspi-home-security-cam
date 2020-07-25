@@ -15,14 +15,11 @@ I forgot to attach the new photos, I decided to put it in this Raspberry Pi case
 - Night vision camera
 - Upload to cloud
 - Motion triggered
-- CV to distinguish between regular user (owner) and new humans
 
 ## Initial Thoughts
 Well I'm going to be living alone soon and I don't like the idea of my home being unattended without any sort of assurance that if someone where to waltz in and take my stuff, I'd have proof/know who it was. Potentially it will act as a deterrent as well like "Hey buddy, see this camera, you've already been uploaded to the cloud" sort of deal.
 
 Anyway, more over it's a fun project, more hardware interfacing and another excuse to connect something to the web. I'll also use Amazon's S3 service for the first time to store these photos.
-
-The future CV aspect will be to have the system be able to distinguish between me (normal operation) and a new human body. The other thing is I have a cat and don't want my cat to trigger it. This also lowers notifications as that's how I figure I will set it up, show me the "highlights" or whenever the motion sensor (PIR) was triggered.
 
 ## Main Objectives
 
@@ -33,9 +30,3 @@ The future CV aspect will be to have the system be able to distinguish between m
 - Upload the photo to S3 with notification
 
 - Setup some sort of "everything is okay clean/flush files"
-
-- Implement the CV aspect
-
-### Edit
-
-Oh man... copy pasting a read me through git hub bad idea haha
